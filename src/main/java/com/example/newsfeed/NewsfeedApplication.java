@@ -1,13 +1,13 @@
-package com.example.jiyeonqueen;
+package com.example.newsfeed;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class JiyeonqueenApplication {
+public class NewsfeedApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(JiyeonqueenApplication.class, args);
+		SpringApplication.run(NewsfeedApplication.class, args);
 	}
 
 }

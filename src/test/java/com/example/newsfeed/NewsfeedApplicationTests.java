@@ -1,10 +1,10 @@
-package com.example.jiyeonqueen;
+package com.example.newsfeed;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class JiyeonqueenApplicationTests {
+class NewsfeedApplicationTests {
 
 	@Test
 	void contextLoads() {
