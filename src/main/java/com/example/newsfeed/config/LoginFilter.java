@@ -1,4 +1,4 @@
-package com.example.newsfeed.user.config;
+package com.example.newsfeed.config;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;

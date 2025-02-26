@@ -1,4 +1,4 @@
-package com.example.newsfeed.user.config;
+package com.example.newsfeed.config;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Component;

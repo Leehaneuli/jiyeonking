@@ -1,6 +1,6 @@
 package com.example.newsfeed.user.service;
 
-import com.example.newsfeed.user.config.PasswordEncoder;
+import com.example.newsfeed.config.PasswordEncoder;
 import com.example.newsfeed.user.dto.UserRequestDto;
 import com.example.newsfeed.user.dto.UserResponseDto;
 import com.example.newsfeed.user.entity.User;
