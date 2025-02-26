@@ -1,6 +1,7 @@
 package com.example.newsfeed.friend.service;
 
 import com.example.newsfeed.friend.dto.FriendListResponseDto;
+import com.example.newsfeed.friend.dto.FriendReqListResponseDto;
 import com.example.newsfeed.friend.dto.FriendResponseDto;
 import com.example.newsfeed.friend.entity.Friend;
 import com.example.newsfeed.friend.repository.FriendRepository;
@@ -72,6 +73,21 @@ public class FriendService {
                         friend.getFollowee().getId(),
                         friend.getFollowee().getName(),
                         friend.getStatus().name()
+                ))
+                .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public List<FriendReqListResponseDto> findFriendReqByUserId(Long userId) {
+        List<Friend> friendRequests = friendRepository.findFriendReqByUserId(userId);
+
+        return friendRequests.stream()
+                .map(request -> new FriendReqListResponseDto(
+                        request.getId(),
+                        request.getFollower().getId(),
+                        request.getFollower().getName(),
+                        request.getStatus().name(),
+                        request.getCreatedAt()
                 ))
                 .collect(Collectors.toList());
     }

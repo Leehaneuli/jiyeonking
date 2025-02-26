@@ -1,6 +1,7 @@
 package com.example.newsfeed.friend.controller;
 
 import com.example.newsfeed.friend.dto.FriendListResponseDto;
+import com.example.newsfeed.friend.dto.FriendReqListResponseDto;
 import com.example.newsfeed.friend.dto.FriendRequestDto;
 import com.example.newsfeed.friend.dto.FriendResponseDto;
 import com.example.newsfeed.friend.service.FriendService;
@@ -49,5 +50,13 @@ public class FriendController {
         List<FriendListResponseDto> friends = friendService.findFriendsByUserId(2L);
 
         return new ResponseEntity<>(friends, HttpStatus.OK);
+    }
+
+    // 친구 요청 전체 조회
+    @GetMapping("/request")
+    public ResponseEntity<List<FriendReqListResponseDto>> findFriendReqByUserId() {
+        List<FriendReqListResponseDto> friendRequests = friendService.findFriendReqByUserId(1L);
+
+        return new ResponseEntity<>(friendRequests, HttpStatus.OK);
     }
 }
