@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface FriendRepository extends JpaRepository<Friend, Long> {
@@ -22,4 +23,6 @@ public interface FriendRepository extends JpaRepository<Friend, Long> {
 
     @Query("SELECT f FROM Friend f INNER JOIN User u on f.follower.id = u.id WHERE f.followee.id = :userId AND f.status = PENDING")
     List<Friend> findFriendReqByUserId(@Param("userId") Long userId);
+
+    Optional<Friend> findByFollowerIdAndFolloweeId(Long followerId, Long followeeId);
 }
