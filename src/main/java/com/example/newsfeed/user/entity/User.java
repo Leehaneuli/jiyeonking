@@ -9,6 +9,7 @@ import com.example.newsfeed.report.entity.Report;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.SQLDelete;
 
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ import java.util.List;
 @Entity
 @Table(name = "user")
 @Getter
+@Setter
 @NoArgsConstructor
 @SQLDelete(sql = "UPDATE user SET is_deleted = true WHERE id = ?")
 public class User extends BaseEntity {
