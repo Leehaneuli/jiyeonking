@@ -1,5 +1,6 @@
 package com.example.newsfeed.friend.service;
 
+import com.example.newsfeed.enums.FriendStatus;
 import com.example.newsfeed.friend.dto.FriendListResponseDto;
 import com.example.newsfeed.friend.dto.FriendReqListResponseDto;
 import com.example.newsfeed.friend.dto.FriendResponseDto;
@@ -41,9 +42,9 @@ public class FriendService {
     }
 
     @Transactional
-    public FriendResponseDto acceptFriend(Long friendId) {
+    public FriendResponseDto updateFriendStatus(Long friendId, FriendStatus status) {
         Friend friend = friendRepository.findFriendById(friendId);
-        friend.acceptFriend();
+        friend.updateFriendStatus(status);
         Friend savedFriend = friendRepository.save(friend);
 
         return new FriendResponseDto(
