@@ -1,5 +1,6 @@
 package com.example.newsfeed.friend.service;
 
+import com.example.newsfeed.friend.dto.FriendListResponseDto;
 import com.example.newsfeed.friend.dto.FriendResponseDto;
 import com.example.newsfeed.friend.entity.Friend;
 import com.example.newsfeed.friend.repository.FriendRepository;
@@ -9,7 +10,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -56,5 +59,20 @@ public class FriendService {
     public void deleteFriend(Long friendId) {
         Friend friend = friendRepository.findFriendById(friendId);
         friendRepository.delete(friend);
+    }
+
+    @Transactional(readOnly = true)
+    public List<FriendListResponseDto> findFriendsByUserId(Long userId) {
+        List<Friend> friends = friendRepository.findFriendsByUserId(userId);
+
+        return friends.stream()
+                .map(friend -> new FriendListResponseDto(
+                        friend.getFollower().getId(),
+                        friend.getFollower().getName(),
+                        friend.getFollowee().getId(),
+                        friend.getFollowee().getName(),
+                        friend.getStatus().name()
+                ))
+                .collect(Collectors.toList());
     }
 }
