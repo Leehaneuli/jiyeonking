@@ -23,4 +23,12 @@ public class FriendController {
 
         return new ResponseEntity<>(friendResponseDto, HttpStatus.OK);
     }
+
+    // 친구 수락
+    @PatchMapping("/{friendId}/accept")
+    public ResponseEntity<FriendResponseDto> acceptFriend(@PathVariable Long friendId) {
+        FriendResponseDto friendResponseDto = friendService.acceptFriend(friendId);
+
+        return new ResponseEntity<>(friendResponseDto, HttpStatus.OK);
+    }
 }
