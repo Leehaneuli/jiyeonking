@@ -19,4 +19,7 @@ public interface FriendRepository extends JpaRepository<Friend, Long> {
 
     @Query("SELECT f FROM Friend f INNER JOIN User fr ON f.follower.id = fr.id INNER JOIN User fe ON f.followee.id = fe.id WHERE (f.follower.id = :userId OR f.followee.id = :userId) AND f.status = APPROVED")
     List<Friend> findFriendsByUserId(@Param("userId") Long userId);
+
+    @Query("SELECT f FROM Friend f INNER JOIN User u on f.follower.id = u.id WHERE f.followee.id = :userId AND f.status = PENDING")
+    List<Friend> findFriendReqByUserId(@Param("userId") Long userId);
 }
