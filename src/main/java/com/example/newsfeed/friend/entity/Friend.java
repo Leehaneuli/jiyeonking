@@ -33,7 +33,7 @@ public class Friend extends BaseEntity {
         this.followee = followee;
     }
 
-    public void acceptFriend() {
-        this.status = FriendStatus.APPROVED;
+    public void updateFriendStatus(FriendStatus status) {
+        this.status = status;
     }
 }
