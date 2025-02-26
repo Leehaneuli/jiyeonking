@@ -1,9 +1,6 @@
 package com.example.newsfeed.friend.controller;
 
-import com.example.newsfeed.friend.dto.FriendListResponseDto;
-import com.example.newsfeed.friend.dto.FriendReqListResponseDto;
-import com.example.newsfeed.friend.dto.FriendRequestDto;
-import com.example.newsfeed.friend.dto.FriendResponseDto;
+import com.example.newsfeed.friend.dto.*;
 import com.example.newsfeed.friend.service.FriendService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -28,10 +25,11 @@ public class FriendController {
         return new ResponseEntity<>(friendResponseDto, HttpStatus.OK);
     }
 
-    // 친구 수락
-    @PatchMapping("/{friendId}/accept")
-    public ResponseEntity<FriendResponseDto> acceptFriend(@PathVariable Long friendId) {
-        FriendResponseDto friendResponseDto = friendService.acceptFriend(friendId);
+    // 친구 수락/거절
+    @PatchMapping("/{friendId}")
+    public ResponseEntity<FriendResponseDto> updateFriendStatus(@PathVariable Long friendId,
+                                                          @RequestBody FriendStatusRequestDto friendStatusRequestDto) {
+        FriendResponseDto friendResponseDto = friendService.updateFriendStatus(friendId, friendStatusRequestDto.getStatus());
 
         return new ResponseEntity<>(friendResponseDto, HttpStatus.OK);
     }
