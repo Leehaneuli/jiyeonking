@@ -35,4 +35,20 @@ public class FriendService {
                 savedFriend.getModifiedAt()
         );
     }
+
+    @Transactional
+    public FriendResponseDto acceptFriend(Long friendId) {
+        Friend friend = friendRepository.findFriendById(friendId);
+        friend.acceptFriend();
+        Friend savedFriend = friendRepository.save(friend);
+
+        return new FriendResponseDto(
+                savedFriend.getId(),
+                savedFriend.getFollower().getId(),
+                savedFriend.getFollowee().getId(),
+                savedFriend.getStatus().name(),
+                savedFriend.getCreatedAt(),
+                savedFriend.getModifiedAt()
+        );
+    }
 }
