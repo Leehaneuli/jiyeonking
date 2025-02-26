@@ -27,7 +27,7 @@ public class Comment extends BaseEntity {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @Column(nullable = false, columnDefinition = "TEXT")
+    @Column(nullable = false)
     private String content;
 
     private boolean isDeleted = false;
