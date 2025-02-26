@@ -51,4 +51,10 @@ public class FriendService {
                 savedFriend.getModifiedAt()
         );
     }
+
+    @Transactional
+    public void deleteFriend(Long friendId) {
+        Friend friend = friendRepository.findFriendById(friendId);
+        friendRepository.delete(friend);
+    }
 }
