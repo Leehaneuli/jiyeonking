@@ -1,5 +1,6 @@
 package com.example.newsfeed.comment.controller;
 
+import com.example.newsfeed.comment.dto.CommentListResponseDto;
 import com.example.newsfeed.comment.dto.CommentRequestDto;
 import com.example.newsfeed.comment.dto.CommentResponseDto;
 import com.example.newsfeed.comment.service.CommentService;
@@ -8,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/boards/{boardId}/comments")
@@ -42,5 +45,13 @@ public class CommentController {
         commentService.deleteComment(boardId, commentId);
 
         return new ResponseEntity<>("댓글 삭제 완료", HttpStatus.OK);
+    }
+
+    // 댓글 전체 조회
+    @GetMapping
+    public ResponseEntity<List<CommentListResponseDto>> findCommentsByBoardId(@PathVariable Long boardId) {
+        List<CommentListResponseDto> comments = commentService.findCommentsByBoardId(boardId);
+
+        return new ResponseEntity<>(comments, HttpStatus.OK);
     }
 }

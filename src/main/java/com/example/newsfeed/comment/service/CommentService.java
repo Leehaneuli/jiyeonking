@@ -2,6 +2,7 @@ package com.example.newsfeed.comment.service;
 
 import com.example.newsfeed.board.entity.Board;
 import com.example.newsfeed.board.repository.BoardRepository;
+import com.example.newsfeed.comment.dto.CommentListResponseDto;
 import com.example.newsfeed.comment.dto.CommentResponseDto;
 import com.example.newsfeed.comment.entity.Comment;
 import com.example.newsfeed.comment.repository.CommentRepository;
@@ -13,7 +14,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -60,5 +63,21 @@ public class CommentService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "댓글을 찾을 수 없습니다."));
 
         commentRepository.delete(comment);
+    }
+
+    @Transactional(readOnly = true)
+    public List<CommentListResponseDto> findCommentsByBoardId(Long boardId) {
+        List<Comment> comments = commentRepository.findCommentsByBoardId(boardId);
+
+        return comments.stream()
+                .map(comment -> new CommentListResponseDto(
+                        comment.getId(),
+                        comment.getBoard().getId(),
+                        comment.getUser().getName(),
+                        comment.getContent(),
+                        comment.getCreatedAt(),
+                        comment.getModifiedAt()
+                ))
+                .collect(Collectors.toList());
     }
 }
