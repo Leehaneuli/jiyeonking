@@ -37,4 +37,8 @@ public class Comment extends BaseEntity {
         this.user = user;
         this.content = content;
     }
+
+    public void updateContent(String content) {
+        this.content = content;
+    }
 }
