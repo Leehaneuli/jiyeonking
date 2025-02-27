@@ -53,4 +53,12 @@ public class CommentService {
                 comment.getModifiedAt()
         );
     }
+
+    @Transactional
+    public void deleteComment(Long boardId, Long commentId) {
+        Comment comment = commentRepository.findCommentByBoardIdAndId(boardId, commentId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "댓글을 찾을 수 없습니다."));
+
+        commentRepository.delete(comment);
+    }
 }
