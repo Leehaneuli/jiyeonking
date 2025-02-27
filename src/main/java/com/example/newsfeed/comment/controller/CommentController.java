@@ -24,4 +24,14 @@ public class CommentController {
 
         return new ResponseEntity<>(commentResponseDto, HttpStatus.CREATED);
     }
+
+    // 댓글 수정
+    @PatchMapping("/{commentId}")
+    public ResponseEntity<CommentResponseDto> updateComment(@PathVariable Long boardId,
+                                                            @PathVariable Long commentId,
+                                                            @Valid @RequestBody CommentRequestDto commentRequestDto) {
+        CommentResponseDto commentResponseDto = commentService.updateComment(boardId, commentId, commentRequestDto.getContent());
+
+        return new ResponseEntity<>(commentResponseDto, HttpStatus.OK);
+    }
 }
